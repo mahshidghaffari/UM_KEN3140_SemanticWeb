@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ns1="http://xmlns.com/foaf/0.1/"
+   xmlns:ns2="https://www.wikidata.org/wiki/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://maastrichtuniversity.nl/Remzi">
+    <rdf:type rdf:resource="https://schema.org/Person"/>
+    <ns2:Q12737077 rdf:resource="https://www.wikidata.org/wiki/Q82594"/>
+    <ns1:firstName>Remzi</ns1:firstName>
+    <ns1:lastName>Celebi</ns1:lastName>
+  </rdf:Description>
+</rdf:RDF>

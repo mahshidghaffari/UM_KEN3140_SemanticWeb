@@ -1,0 +1,4 @@
+<http://maastrichtuniversity.nl/Remzi> <http://xmlns.com/foaf/0.1/firstName> "Remzi" .
+<http://maastrichtuniversity.nl/Remzi> <http://xmlns.com/foaf/0.1/lastName> "Celebi" .
+<http://maastrichtuniversity.nl/Remzi> <https://www.wikidata.org/wiki/Q12737077> <https://www.wikidata.org/wiki/Q82594> .
+<http://maastrichtuniversity.nl/Remzi> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://schema.org/Person> .

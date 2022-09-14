@@ -1,0 +1,9 @@
+@prefix ns1: <http://xmlns.com/foaf/0.1/> .
+@prefix ns2: <https://www.wikidata.org/wiki/> .
+@prefix um: <http://maastrichtuniversity.nl/> .
+
+um:Remzi a <https://schema.org/Person> ;
+    ns1:firstName "Remzi" ;
+    ns1:lastName "Celebi" ;
+    ns2:Q12737077 ns2:Q82594 .
+
