@@ -1,0 +1,10 @@
+@prefix ex: <http://example.com/> .
+@prefix ns1: <http://xmlns.com/foaf/0.1/> .
+
+ex:Harry ex:classmate ex:Luna,
+        ex:Ron ;
+    ns1:member ex:Hogwarts .
+
+ex:Hogwarts a ex:school ;
+    ns1:name "hogwarts" .
+
