@@ -1,0 +1,110 @@
+@prefix ex: <http://example.com/> .
+@prefix ns1: <http://xmlns.com/foaf/0.1/> .
+@prefix ns2: <https://schema.org/> .
+@prefix wd: <https://www.wikidata.org/wiki/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Mcgonagall a ex:person ;
+    ex:colleague ex:Dumbledore,
+        ex:Snape ;
+    ex:level 1 ;
+    ex:occupation ex:teacher ;
+    ns1:age 70 ;
+    ns1:firstName "Mcgonagall" ;
+    ns1:gender ex:female ;
+    ns1:member ex:Hogwarts ;
+    ns2:birthDate "-1941"^^xsd:date ;
+    ns2:height 1650 ;
+    ns2:teaches ex:Luna,
+        ex:Ron .
+
+ex:Dumbledore a ex:person ;
+    ex:colleague ex:Dumbledore,
+        ex:Mcgonagall,
+        ex:Snape ;
+    ex:level 1 ;
+    ex:occupation ex:headmaster ;
+    ns1:age 120 ;
+    ns1:firstName "Dumbledore" ;
+    ns1:gender ex:male ;
+    ns1:member ex:Hogwarts ;
+    ns2:birthDate "-1891"^^xsd:date ;
+    ns2:height 150 ;
+    ns2:teaches ex:Draco,
+        ex:Harry,
+        ex:Luna,
+        ex:Ron .
+
+ex:Snape a ex:person ;
+    ex:level 2 ;
+    ex:occupation ex:teacher ;
+    ns1:age 50 ;
+    ns1:firstName "Snape" ;
+    ns1:gender ex:male ;
+    ns1:member ex:Hogwarts ;
+    ns2:birthDate "-1956"^^xsd:date ;
+    ns2:height 180 ;
+    ns2:teaches ex:Draco,
+        ex:Harry .
+
+ex:headmaster ns1:member ex:school .
+
+ex:Draco a ex:person ;
+    ex:gpa 6.5 ;
+    ex:occupation ex:student ;
+    ns1:age 18 ;
+    ns1:firstName "Draco" ;
+    ns1:gender ex:male ;
+    ns1:member ex:Hogwarts ;
+    ns2:birthDate "-2008"^^xsd:date ;
+    ns2:height 170 ;
+    wd:Q28008283 ex:Luna .
+
+ex:teacher ex:colleague ex:headmaster,
+        ex:teacher ;
+    ex:teachTo ex:student ;
+    ns1:member ex:school .
+
+ex:Harry a ex:person ;
+    ex:gpa 7.5 ;
+    ex:occupation ex:student ;
+    ns1:age 19 ;
+    ns1:firstName "Harry" ;
+    ns1:gender ex:male ;
+    ns1:member ex:Hogwarts ;
+    ns2:birthDate "-1997"^^xsd:date ;
+    ns2:height 162 ;
+    wd:Q28008283 ex:Luna,
+        ex:Ron .
+
+ex:Ron a ex:person ;
+    ex:gpa 7 ;
+    ex:occupation ex:student ;
+    ns1:age 19 ;
+    ns1:firstName "Ron" ;
+    ns1:gender ex:male ;
+    ns1:member ex:Hogwarts ;
+    ns2:birthDate "-1997"^^xsd:date ;
+    ns2:height 180 ;
+    wd:Q28008283 ex:Harry,
+        ex:Luna .
+
+ex:Luna a ex:person ;
+    ex:gpa 8.5 ;
+    ex:occupation ex:student ;
+    ns1:age 16 ;
+    ns1:firstName "Luna" ;
+    ns1:gender ex:female ;
+    ns1:member ex:Hogwarts ;
+    ns2:birthDate "-1980"^^xsd:date ;
+    ns2:height 155 ;
+    wd:Q28008283 ex:Draco,
+        ex:Harry,
+        ex:Ron .
+
+ex:student ns1:member ex:school ;
+    wd:Q28008283 ex:student .
+
+ex:Hogwarts a ex:school ;
+    ns1:name "hogwarts" .
+
