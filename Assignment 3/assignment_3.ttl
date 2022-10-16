@@ -1,0 +1,293 @@
+@prefix : <http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8> .
+
+<http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasCustomer
+:hasCustomer rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasCustomer ;
+                           owl:someValuesFrom :customers
+                         ] .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasName
+:hasName rdf:type owl:ObjectProperty ;
+         rdfs:comment """property enabling the assigning of names to entities e.g. products,
+suppliers""" .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasOrder
+:hasOrder rdf:type owl:ObjectProperty ;
+          rdfs:domain :customers .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasPrice
+:hasPrice rdf:type owl:ObjectProperty ;
+          rdfs:comment "property enabling the assigning of prices to products" .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasProduct
+:hasProduct rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasProduct ;
+                          owl:someValuesFrom :product
+                        ] .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasSupplier
+:hasSupplier rdf:type owl:ObjectProperty ;
+             rdfs:domain :supplier ;
+             rdfs:comment "property enabling the assigning of suppliers to products" .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#isLocatedIn
+:isLocatedIn rdf:type owl:ObjectProperty ;
+             rdfs:domain :belgianCity ,
+                         :dutchCity ,
+                         :germanCity ;
+             rdfs:comment "property enabling the assigning of geographic locations to suppliers" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#price
+:price rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://schema.org/Person
+<http://schema.org/Person> rdf:type owl:Class ;
+                           rdfs:subClassOf :customers .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#belgianCity
+:belgianCity rdf:type owl:Class ;
+             rdfs:subClassOf :location .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#car
+:car rdf:type owl:Class ;
+     rdfs:subClassOf :product .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#carPart
+:carPart rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty :isLocatedIn ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :germanCity
+                             ] ;
+         rdfs:subClassOf :product ;
+         rdfs:comment "class representing a certain kind of product that the company sells" .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#customers
+:customers rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                 owl:onProperty :hasName ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :customers
+                               ] .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#dutchCity
+:dutchCity rdf:type owl:Class ;
+           rdfs:subClassOf :location .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#germanCity
+:germanCity rdf:type owl:Class ;
+            rdfs:subClassOf :location .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#location
+:location rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#order
+:order rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasCustomer ;
+                             owl:someValuesFrom :customers
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasProduct ;
+                             owl:someValuesFrom :product
+                           ] .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#product
+:product rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasSupplier ;
+                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :supplier
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasName ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :product
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasPrice ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :product
+                             ] ;
+         rdfs:comment "class representing company products" .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#supplier
+:supplier rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                owl:onProperty :isLocatedIn ;
+                                                owl:someValuesFrom :belgianCity
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :isLocatedIn ;
+                                                owl:someValuesFrom :dutchCity
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :isLocatedIn ;
+                                                owl:someValuesFrom :germanCity
+                                              ]
+                                            )
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :hasName ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass :supplier
+                              ] ;
+          rdfs:comment "class representing product suppliers" .
+
+
+###  https://schema.org/Store
+<https://schema.org/Store> rdf:type owl:Class ;
+                           rdfs:subClassOf :customers .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Alternator
+:Alternator rdf:type owl:NamedIndividual ,
+                     :carPart ,
+                     :product ;
+            :hasName :Alternator ;
+            :hasPrice :price .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Berlin
+:Berlin rdf:type owl:NamedIndividual ,
+                 :germanCity .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Brakes
+:Brakes rdf:type owl:NamedIndividual ,
+                 :carPart ,
+                 :product ;
+        :hasName :Brakes ;
+        :hasPrice :price .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Du_sup
+:Du_sup rdf:type owl:NamedIndividual ;
+        :hasName :Du_sup ;
+        :hasProduct :Brakes ,
+                    :Fuel_Tank ;
+        :isLocatedIn :Maastricht .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Engine
+:Engine rdf:type owl:NamedIndividual ,
+                 :carPart ,
+                 :product ;
+        :hasName :Engine ;
+        :hasPrice :price .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Front_Axle
+:Front_Axle rdf:type owl:NamedIndividual ,
+                     :carPart ,
+                     :product ;
+            :hasName :Front_Axle ;
+            :hasPrice :price .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Fuel_Tank
+:Fuel_Tank rdf:type owl:NamedIndividual ,
+                    :carPart ,
+                    :product ;
+           :hasName :Fuel_Tank .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#GE_Sup
+:GE_Sup rdf:type owl:NamedIndividual ,
+                 :supplier ;
+        :hasName :GE_Sup ;
+        :hasProduct :Engine ,
+                    :battery ;
+        :isLocatedIn :Berlin .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Maastricht
+:Maastricht rdf:type owl:NamedIndividual ,
+                     :dutchCity .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Mahshid
+:Mahshid rdf:type owl:NamedIndividual ,
+                  <http://schema.org/Person> ,
+                  :customers ;
+         :hasOrder :Order-4322 .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Order-4322
+:Order-4322 rdf:type owl:NamedIndividual ,
+                     :order ;
+            :hasCustomer :Mahshid ;
+            :hasProduct :Brakes .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Radiator
+:Radiator rdf:type owl:NamedIndividual ,
+                   :carPart ,
+                   :product ;
+          :hasName :Radiator ;
+          :hasPrice :price .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#battery
+:battery rdf:type owl:NamedIndividual ,
+                  :carPart ,
+                  :product ;
+         :hasName :battery ;
+         :hasPrice :price .
+
+
+###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#price
+:price rdf:type owl:NamedIndividual ,
+                [ rdf:type owl:Restriction ;
+                  owl:onProperty :price ;
+                  owl:allValuesFrom xsd:double
+                ] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
