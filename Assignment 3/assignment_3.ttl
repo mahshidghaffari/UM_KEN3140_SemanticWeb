@@ -208,7 +208,8 @@ suppliers""" .
 
 
 ###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Du_sup
-:Du_sup rdf:type owl:NamedIndividual ;
+:Du_sup rdf:type owl:NamedIndividual ,
+                 :supplier ;
         :hasName :Du_sup ;
         :hasProduct :Brakes ,
                     :Fuel_Tank ;
