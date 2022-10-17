@@ -12,283 +12,431 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasCustomer
-:hasCustomer rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf owl:topObjectProperty ;
-             rdfs:domain [ rdf:type owl:Restriction ;
-                           owl:onProperty :hasCustomer ;
-                           owl:someValuesFrom :customers
-                         ] .
+###  http://hasTask
+<http://hasTask> rdf:type owl:ObjectProperty ,
+                          owl:AsymmetricProperty ,
+                          owl:IrreflexiveProperty ;
+                 rdfs:domain <https://dbpedia.org/page/Role> ;
+                 rdfs:range <https://dbpedia.org/page/Task> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasName
-:hasName rdf:type owl:ObjectProperty ;
-         rdfs:comment """property enabling the assigning of names to entities e.g. products,
-suppliers""" .
+###  http://example.org/hasAge
+<http://example.org/hasAge> rdf:type owl:ObjectProperty ,
+                                     owl:FunctionalProperty ;
+                            rdfs:domain <https://dbpedia.org/property/employees> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasOrder
-:hasOrder rdf:type owl:ObjectProperty ;
-          rdfs:domain :customers .
+###  http://example.org/hasName
+<http://example.org/hasName> rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf owl:topObjectProperty ;
+                             rdf:type owl:FunctionalProperty .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasPrice
-:hasPrice rdf:type owl:ObjectProperty ;
-          rdfs:comment "property enabling the assigning of prices to products" .
+###  http://example.org/hasPrice
+<http://example.org/hasPrice> rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain <https://dbpedia.org/page/Product> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasProduct
-:hasProduct rdf:type owl:ObjectProperty ;
-            rdfs:domain [ rdf:type owl:Restriction ;
-                          owl:onProperty :hasProduct ;
-                          owl:someValuesFrom :product
-                        ] .
+###  http://example.org/hasSalary
+<http://example.org/hasSalary> rdf:type owl:ObjectProperty ,
+                                        owl:AsymmetricProperty ;
+                               rdfs:domain <https://dbpedia.org/property/employees> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#hasSupplier
-:hasSupplier rdf:type owl:ObjectProperty ;
-             rdfs:domain :supplier ;
-             rdfs:comment "property enabling the assigning of suppliers to products" .
+###  https://example.org/hasCustomer
+<https://example.org/hasCustomer> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <https://dbpedia.org/page/Order> ;
+                                  rdfs:range <https://dbpedia.org/page/Customer> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#isLocatedIn
-:isLocatedIn rdf:type owl:ObjectProperty ;
-             rdfs:domain :belgianCity ,
-                         :dutchCity ,
-                         :germanCity ;
-             rdfs:comment "property enabling the assigning of geographic locations to suppliers" .
+###  https://example.org/hasOrder
+<https://example.org/hasOrder> rdf:type owl:ObjectProperty ;
+                               rdfs:domain <https://dbpedia.org/page/Customer> ;
+                               rdfs:range <https://dbpedia.org/page/Order> .
 
 
-#################################################################
-#    Data properties
-#################################################################
+###  https://example.org/hasProduct
+<https://example.org/hasProduct> rdf:type owl:ObjectProperty ,
+                                          owl:AsymmetricProperty ;
+                                 rdfs:domain <https://dbpedia.org/page/Order> ;
+                                 rdfs:range <https://dbpedia.org/page/Product> .
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#price
-:price rdf:type owl:DatatypeProperty .
+
+###  https://example.org/hasRole
+<https://example.org/hasRole> rdf:type owl:ObjectProperty ,
+                                       owl:AsymmetricProperty ,
+                                       owl:IrreflexiveProperty ;
+                              rdfs:domain <https://dbpedia.org/property/employees> ;
+                              rdfs:range <https://dbpedia.org/page/Role> .
+
+
+###  https://example.org/hasSupplier
+<https://example.org/hasSupplier> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <https://dbpedia.org/page/Product> ;
+                                  rdfs:range <https://example.org/Suppliers> ;
+                                  rdfs:comment "property enabling the assigning of suppliers to products" .
+
+
+###  https://example.org/isLocatedIn
+<https://example.org/isLocatedIn> rdf:type owl:ObjectProperty ,
+                                           owl:FunctionalProperty ;
+                                  rdfs:domain <https://example.org/Suppliers> ;
+                                  rdfs:range <https://dbpedia.org/page/Location> ;
+                                  rdfs:comment "property enabling the assigning of geographic locations to suppliers" .
 
 
 #################################################################
 #    Classes
 #################################################################
 
+###  http://example.org/BackTask
+<http://example.org/BackTask> rdf:type owl:Class ;
+                              rdfs:subClassOf <https://dbpedia.org/page/Task> ;
+                              owl:disjointWith [ owl:intersectionOf ( <http://example.org/CIOTask>
+                                                                      <http://example.org/ConsultantTask>
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] .
+
+
+###  http://example.org/CIOTask
+<http://example.org/CIOTask> rdf:type owl:Class ;
+                             rdfs:subClassOf <https://dbpedia.org/page/Task> ;
+                             owl:disjointWith [ owl:intersectionOf ( <http://example.org/BackTask>
+                                                                     <http://example.org/ConsultantTask>
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] .
+
+
+###  http://example.org/ConsultantTask
+<http://example.org/ConsultantTask> rdf:type owl:Class ;
+                                    rdfs:subClassOf <https://dbpedia.org/page/Task> ;
+                                    owl:disjointWith [ owl:intersectionOf ( <http://example.org/CIOTask>
+                                                                            <https://example.org/Chief_Intelligence_Officer>
+                                                                          ) ;
+                                                       rdf:type owl:Class
+                                                     ] .
+
+
+###  http://example.org/TaskA
+<http://example.org/TaskA> rdf:type owl:Class .
+
+
 ###  http://schema.org/Person
 <http://schema.org/Person> rdf:type owl:Class ;
-                           rdfs:subClassOf :customers .
+                           rdfs:subClassOf <https://dbpedia.org/page/Customer> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#belgianCity
-:belgianCity rdf:type owl:Class ;
-             rdfs:subClassOf :location .
+###  https://dbpedia.org/page/Car
+<https://dbpedia.org/page/Car> rdf:type owl:Class ;
+                               rdfs:subClassOf <https://dbpedia.org/page/Product> ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty <https://example.org/hasSupplier> ;
+                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass <https://example.org/Suppliers>
+                                               ] .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#car
-:car rdf:type owl:Class ;
-     rdfs:subClassOf :product .
+###  https://dbpedia.org/page/Consultant
+<https://dbpedia.org/page/Consultant> rdf:type owl:Class ;
+                                      rdfs:subClassOf <https://dbpedia.org/page/Role> ,
+                                                      [ owl:intersectionOf ( [ rdf:type owl:Class ;
+                                                                               owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty <http://hasTask> ;
+                                                                                                  owl:someValuesFrom <http://example.org/CIOTask>
+                                                                                                ]
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://hasTask> ;
+                                                                               owl:someValuesFrom <http://example.org/BackTask>
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://hasTask> ;
+                                                                               owl:someValuesFrom <http://example.org/ConsultantTask>
+                                                                             ]
+                                                                           ) ;
+                                                        rdf:type owl:Class
+                                                      ] ;
+                                      owl:disjointWith <https://example.org/Back_End_Developer> ;
+                                      rdfs:comment """Consultant:  is a person : which does below: 
+1- has salary.
+2- can have back_end & Consaltant but Not the CIO.
+3- has name and age""" .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#carPart
-:carPart rdf:type owl:Class ;
-         owl:equivalentClass [ rdf:type owl:Restriction ;
-                               owl:onProperty :isLocatedIn ;
-                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass :germanCity
-                             ] ;
-         rdfs:subClassOf :product ;
-         rdfs:comment "class representing a certain kind of product that the company sells" .
+###  https://dbpedia.org/page/Customer
+<https://dbpedia.org/page/Customer> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://example.org/TaskA> ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty <https://example.org/hasOrder> ;
+                                                      owl:someValuesFrom <https://dbpedia.org/page/Order>
+                                                    ] .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#customers
-:customers rdf:type owl:Class ;
-           owl:equivalentClass [ rdf:type owl:Restriction ;
-                                 owl:onProperty :hasName ;
-                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                 owl:onClass :customers
-                               ] .
+###  https://dbpedia.org/page/Location
+<https://dbpedia.org/page/Location> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://example.org/TaskA> ,
+                                                    [ rdf:type owl:Class ;
+                                                      owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty <https://example.org/isLocatedIn> ;
+                                                                      owl:someValuesFrom <https://example.org/BelgianCity>
+                                                                    ]
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty <https://example.org/isLocatedIn> ;
+                                                                      owl:someValuesFrom <https://example.org/DutchCity>
+                                                                    ]
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty <https://example.org/isLocatedIn> ;
+                                                                      owl:someValuesFrom <https://example.org/GermanCity>
+                                                                    ]
+                                                                  )
+                                                    ] .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#dutchCity
-:dutchCity rdf:type owl:Class ;
-           rdfs:subClassOf :location .
+###  https://dbpedia.org/page/Order
+<https://dbpedia.org/page/Order> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://example.org/TaskA> ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://example.org/hasCustomer> ;
+                                                   owl:someValuesFrom <https://dbpedia.org/page/Customer>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://example.org/hasProduct> ;
+                                                   owl:someValuesFrom <https://dbpedia.org/page/Product>
+                                                 ] .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#germanCity
-:germanCity rdf:type owl:Class ;
-            rdfs:subClassOf :location .
+###  https://dbpedia.org/page/Product
+<https://dbpedia.org/page/Product> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://example.org/TaskA> ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <https://example.org/hasSupplier> ;
+                                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                     owl:onClass <https://example.org/Suppliers>
+                                                   ] ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <http://example.org/hasName> ;
+                                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                   ] ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <http://example.org/hasPrice> ;
+                                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                   ] ;
+                                   rdfs:comment "class representing company products" .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#location
-:location rdf:type owl:Class .
+###  https://dbpedia.org/page/Role
+<https://dbpedia.org/page/Role> rdf:type owl:Class ;
+                                rdfs:subClassOf <https://example.org/taskB> ,
+                                                [ rdf:type owl:Class ;
+                                                  owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <https://example.org/hasRole> ;
+                                                                  owl:someValuesFrom <https://dbpedia.org/page/Consultant>
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <https://example.org/hasRole> ;
+                                                                  owl:someValuesFrom <https://example.org/Back_End_Developer>
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <https://example.org/hasRole> ;
+                                                                  owl:someValuesFrom <https://example.org/Chief_Intelligence_Officer>
+                                                                ]
+                                                              )
+                                                ] .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#order
-:order rdf:type owl:Class ;
-       owl:equivalentClass [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasCustomer ;
-                             owl:someValuesFrom :customers
-                           ] ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasProduct ;
-                             owl:someValuesFrom :product
-                           ] .
+###  https://dbpedia.org/page/Store
+<https://dbpedia.org/page/Store> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://dbpedia.org/page/Customer> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#product
-:product rdf:type owl:Class ;
-         owl:equivalentClass [ rdf:type owl:Restriction ;
-                               owl:onProperty :hasSupplier ;
-                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass :supplier
-                             ] ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty :hasName ;
-                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass :product
-                             ] ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty :hasPrice ;
-                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass :product
-                             ] ;
-         rdfs:comment "class representing company products" .
+###  https://dbpedia.org/page/Task
+<https://dbpedia.org/page/Task> rdf:type owl:Class ;
+                                rdfs:subClassOf <https://example.org/taskB> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#supplier
-:supplier rdf:type owl:Class ;
-          owl:equivalentClass [ rdf:type owl:Class ;
-                                owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                owl:onProperty :isLocatedIn ;
-                                                owl:someValuesFrom :belgianCity
-                                              ]
+###  https://dbpedia.org/property/employees
+<https://dbpedia.org/property/employees> rdf:type owl:Class ;
+                                         rdfs:subClassOf <https://example.org/taskB> ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <https://example.org/hasRole> ;
+                                                           owl:allValuesFrom <https://dbpedia.org/page/Role>
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://example.org/hasAge> ;
+                                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://example.org/hasName> ;
+                                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ;
+                                         rdfs:comment "the people that work should have name and age and salary and role" .
+
+
+###  https://example.org/Back_End_Developer
+<https://example.org/Back_End_Developer> rdf:type owl:Class ;
+                                         rdfs:subClassOf <https://dbpedia.org/page/Role> ,
+                                                         [ owl:intersectionOf ( [ rdf:type owl:Class ;
+                                                                                  owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://hasTask> ;
+                                                                                                     owl:someValuesFrom <http://example.org/CIOTask>
+                                                                                                   ]
+                                                                                ]
+                                                                                [ rdf:type owl:Class ;
+                                                                                  owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://hasTask> ;
+                                                                                                     owl:someValuesFrom <http://example.org/ConsultantTask>
+                                                                                                   ]
+                                                                                ]
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty <http://hasTask> ;
+                                                                                  owl:someValuesFrom <http://example.org/BackTask>
+                                                                                ]
+                                                                              ) ;
+                                                           rdf:type owl:Class
+                                                         ] ;
+                                         owl:disjointWith <https://example.org/Chief_Intelligence_Officer> ;
+                                         rdfs:comment """back end developer is a role which should assign to each employee.
+in this role the employee can only take back end tasks not the other tasks""" .
+
+
+###  https://example.org/BelgianCity
+<https://example.org/BelgianCity> rdf:type owl:Class ;
+                                  rdfs:subClassOf <https://dbpedia.org/page/Location> ;
+                                  owl:disjointWith <https://example.org/DutchCity> ,
+                                                   <https://example.org/GermanCity> .
+
+
+###  https://example.org/CarPart
+<https://example.org/CarPart> rdf:type owl:Class ;
+                              rdfs:subClassOf <https://dbpedia.org/page/Product> ,
                                               [ rdf:type owl:Restriction ;
-                                                owl:onProperty :isLocatedIn ;
-                                                owl:someValuesFrom :dutchCity
-                                              ]
-                                              [ rdf:type owl:Restriction ;
-                                                owl:onProperty :isLocatedIn ;
-                                                owl:someValuesFrom :germanCity
-                                              ]
-                                            )
-                              ] ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :hasName ;
-                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                owl:onClass :supplier
-                              ] ;
-          rdfs:comment "class representing product suppliers" .
+                                                owl:onProperty <https://example.org/isLocatedIn> ;
+                                                owl:allValuesFrom <https://example.org/GermanCity>
+                                              ] ;
+                              rdfs:comment "class representing a certain kind of product that the company sells" .
 
 
-###  https://schema.org/Store
-<https://schema.org/Store> rdf:type owl:Class ;
-                           rdfs:subClassOf :customers .
+###  https://example.org/Chief_Intelligence_Officer
+<https://example.org/Chief_Intelligence_Officer> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <https://dbpedia.org/page/Role> ,
+                                                                 [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <http://hasTask> ;
+                                                                                          owl:someValuesFrom <http://example.org/BackTask>
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <http://hasTask> ;
+                                                                                          owl:someValuesFrom <http://example.org/CIOTask>
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <http://hasTask> ;
+                                                                                          owl:someValuesFrom <http://example.org/ConsultantTask>
+                                                                                        ]
+                                                                                      ) ;
+                                                                   rdf:type owl:Class
+                                                                 ] ;
+                                                 rdfs:comment """Chief is a role which should assign to each employee.
+in this role the employee can take all of the tasks including (back end tasks , CIOTask, ConsultantTask""" .
+
+
+###  https://example.org/DutchCity
+<https://example.org/DutchCity> rdf:type owl:Class ;
+                                rdfs:subClassOf <https://dbpedia.org/page/Location> ;
+                                owl:disjointWith <https://example.org/GermanCity> .
+
+
+###  https://example.org/GermanCity
+<https://example.org/GermanCity> rdf:type owl:Class ;
+                                 rdfs:subClassOf <https://dbpedia.org/page/Location> .
+
+
+###  https://example.org/Suppliers
+<https://example.org/Suppliers> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://example.org/TaskA> ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty <https://example.org/isLocatedIn> ;
+                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                  owl:onClass <https://dbpedia.org/page/Location>
+                                                ] ;
+                                rdfs:comment "class representing product suppliers" .
+
+
+###  https://example.org/taskB
+<https://example.org/taskB> rdf:type owl:Class .
 
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Alternator
-:Alternator rdf:type owl:NamedIndividual ,
-                     :carPart ,
-                     :product ;
-            :hasName :Alternator ;
-            :hasPrice :price .
-
-
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Berlin
-:Berlin rdf:type owl:NamedIndividual ,
-                 :germanCity .
-
-
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Brakes
-:Brakes rdf:type owl:NamedIndividual ,
-                 :carPart ,
-                 :product ;
-        :hasName :Brakes ;
-        :hasPrice :price .
-
-
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Du_sup
-:Du_sup rdf:type owl:NamedIndividual ,
-                 :supplier ;
-        :hasName :Du_sup ;
-        :hasProduct :Brakes ,
-                    :Fuel_Tank ;
-        :isLocatedIn :Maastricht .
-
-
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Engine
-:Engine rdf:type owl:NamedIndividual ,
-                 :carPart ,
-                 :product ;
-        :hasName :Engine ;
-        :hasPrice :price .
-
-
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Front_Axle
-:Front_Axle rdf:type owl:NamedIndividual ,
-                     :carPart ,
-                     :product ;
-            :hasName :Front_Axle ;
-            :hasPrice :price .
+###  http://example.org/Front_Axle
+<http://example.org/Front_Axle> rdf:type owl:NamedIndividual ,
+                                         <https://dbpedia.org/page/Product> ,
+                                         <https://example.org/CarPart> .
 
 
 ###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Fuel_Tank
 :Fuel_Tank rdf:type owl:NamedIndividual ,
-                    :carPart ,
-                    :product ;
-           :hasName :Fuel_Tank .
+                    <https://dbpedia.org/page/Product> ,
+                    <https://example.org/CarPart> .
 
 
 ###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#GE_Sup
 :GE_Sup rdf:type owl:NamedIndividual ,
-                 :supplier ;
-        :hasName :GE_Sup ;
-        :hasProduct :Engine ,
-                    :battery ;
-        :isLocatedIn :Berlin .
+                 <https://example.org/Suppliers> ;
+        <https://example.org/isLocatedIn> <https://dbpedia.org/page/Berlin> .
 
 
 ###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Maastricht
 :Maastricht rdf:type owl:NamedIndividual ,
-                     :dutchCity .
+                     <https://example.org/DutchCity> .
 
 
 ###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Mahshid
 :Mahshid rdf:type owl:NamedIndividual ,
-                  <http://schema.org/Person> ,
-                  :customers ;
-         :hasOrder :Order-4322 .
+                  <https://dbpedia.org/page/Customer> ;
+         <https://example.org/hasOrder> :Order-4322 .
 
 
 ###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Order-4322
 :Order-4322 rdf:type owl:NamedIndividual ,
-                     :order ;
-            :hasCustomer :Mahshid ;
-            :hasProduct :Brakes .
+                     <https://dbpedia.org/page/Order> ;
+            <https://example.org/hasCustomer> :Mahshid ;
+            <https://example.org/hasProduct> <https://dbpedia.org/page/Brake> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#Radiator
-:Radiator rdf:type owl:NamedIndividual ,
-                   :carPart ,
-                   :product ;
-          :hasName :Radiator ;
-          :hasPrice :price .
+###  https://dbpedia.org/page/Alternator
+<https://dbpedia.org/page/Alternator> rdf:type owl:NamedIndividual ,
+                                               <https://dbpedia.org/page/Product> ,
+                                               <https://example.org/CarPart> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#battery
-:battery rdf:type owl:NamedIndividual ,
-                  :carPart ,
-                  :product ;
-         :hasName :battery ;
-         :hasPrice :price .
+###  https://dbpedia.org/page/Berlin
+<https://dbpedia.org/page/Berlin> rdf:type owl:NamedIndividual ,
+                                           <https://example.org/GermanCity> .
 
 
-###  http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#price
-:price rdf:type owl:NamedIndividual ,
-                [ rdf:type owl:Restriction ;
-                  owl:onProperty :price ;
-                  owl:allValuesFrom xsd:double
-                ] .
+###  https://dbpedia.org/page/Brake
+<https://dbpedia.org/page/Brake> rdf:type owl:NamedIndividual ,
+                                          <https://dbpedia.org/page/Product> ,
+                                          <https://example.org/CarPart> .
+
+
+###  https://dbpedia.org/page/Radiator
+<https://dbpedia.org/page/Radiator> rdf:type owl:NamedIndividual ,
+                                             <https://dbpedia.org/page/Product> ,
+                                             <https://example.org/CarPart> .
+
+
+###  https://example.org/Du_sup
+<https://example.org/Du_sup> rdf:type owl:NamedIndividual ,
+                                      <https://example.org/Suppliers> ;
+                             <https://example.org/hasProduct> :Fuel_Tank ,
+                                                              <https://dbpedia.org/page/Brake> ;
+                             <https://example.org/isLocatedIn> :Maastricht .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

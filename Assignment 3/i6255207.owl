@@ -1,0 +1,443 @@
+Prefix: : <http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8#>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://www.semanticweb.org/mah/ontologies/2022/9/untitled-ontology-8>
+
+
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+ObjectProperty: <http://example.org/hasAge>
+
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        <https://dbpedia.org/property/employees>
+    
+    
+ObjectProperty: <http://example.org/hasName>
+
+    SubPropertyOf: 
+        owl:topObjectProperty
+    
+    Characteristics: 
+        Functional
+    
+    
+ObjectProperty: <http://example.org/hasPrice>
+
+    SubPropertyOf: 
+        owl:topObjectProperty
+    
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        <https://dbpedia.org/page/Product>
+    
+    
+ObjectProperty: <http://example.org/hasSalary>
+
+    Characteristics: 
+        Asymmetric
+    
+    Domain: 
+        <https://dbpedia.org/property/employees>
+    
+    
+ObjectProperty: <http://hasTask>
+
+    Characteristics: 
+        Irreflexive,
+        Asymmetric
+    
+    Domain: 
+        <https://dbpedia.org/page/Role>
+    
+    Range: 
+        <https://dbpedia.org/page/Task>
+    
+    
+ObjectProperty: <https://example.org/hasCustomer>
+
+    Domain: 
+        <https://dbpedia.org/page/Order>
+    
+    Range: 
+        <https://dbpedia.org/page/Customer>
+    
+    
+ObjectProperty: <https://example.org/hasOrder>
+
+    Domain: 
+        <https://dbpedia.org/page/Customer>
+    
+    Range: 
+        <https://dbpedia.org/page/Order>
+    
+    
+ObjectProperty: <https://example.org/hasProduct>
+
+    Characteristics: 
+        Asymmetric
+    
+    Domain: 
+        <https://dbpedia.org/page/Order>
+    
+    Range: 
+        <https://dbpedia.org/page/Product>
+    
+    
+ObjectProperty: <https://example.org/hasRole>
+
+    Characteristics: 
+        Irreflexive,
+        Asymmetric
+    
+    Domain: 
+        <https://dbpedia.org/property/employees>
+    
+    Range: 
+        <https://dbpedia.org/page/Role>
+    
+    
+ObjectProperty: <https://example.org/hasSupplier>
+
+    Annotations: 
+        rdfs:comment "property enabling the assigning of suppliers to products"
+    
+    Domain: 
+        <https://dbpedia.org/page/Product>
+    
+    Range: 
+        <https://example.org/Suppliers>
+    
+    
+ObjectProperty: <https://example.org/isLocatedIn>
+
+    Annotations: 
+        rdfs:comment "property enabling the assigning of geographic locations to suppliers"
+    
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        <https://example.org/Suppliers>
+    
+    Range: 
+        <https://dbpedia.org/page/Location>
+    
+    
+ObjectProperty: owl:topObjectProperty
+
+    
+Class: <http://example.org/BackTask>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Task>
+    
+    DisjointWith: 
+        <http://example.org/CIOTask>
+         and <http://example.org/ConsultantTask>
+    
+    
+Class: <http://example.org/CIOTask>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Task>
+    
+    DisjointWith: 
+        <http://example.org/BackTask>
+         and <http://example.org/ConsultantTask>
+    
+    
+Class: <http://example.org/ConsultantTask>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Task>
+    
+    DisjointWith: 
+        <http://example.org/CIOTask>
+         and <https://example.org/Chief_Intelligence_Officer>
+    
+    
+Class: <http://example.org/TaskA>
+
+    
+Class: <http://schema.org/Person>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Customer>
+    
+    
+Class: <https://dbpedia.org/page/Car>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Product>,
+        <https://example.org/hasSupplier> min 1 <https://example.org/Suppliers>
+    
+    
+Class: <https://dbpedia.org/page/Consultant>
+
+    Annotations: 
+        rdfs:comment "Consultant:  is a person : which does below: 
+1- has salary.
+2- can have back_end & Consaltant but Not the CIO.
+3- has name and age"
+    
+    SubClassOf: 
+        <https://dbpedia.org/page/Role>,
+        (not (<http://hasTask> some <http://example.org/CIOTask>))
+         and (<http://hasTask> some <http://example.org/BackTask>)
+         and (<http://hasTask> some <http://example.org/ConsultantTask>)
+    
+    DisjointWith: 
+        <https://example.org/Back_End_Developer>
+    
+    
+Class: <https://dbpedia.org/page/Customer>
+
+    SubClassOf: 
+        <http://example.org/TaskA>,
+        <https://example.org/hasOrder> some <https://dbpedia.org/page/Order>
+    
+    
+Class: <https://dbpedia.org/page/Location>
+
+    SubClassOf: 
+        <http://example.org/TaskA>,
+        (<https://example.org/isLocatedIn> some <https://example.org/BelgianCity>) or (<https://example.org/isLocatedIn> some <https://example.org/DutchCity>) or (<https://example.org/isLocatedIn> some <https://example.org/GermanCity>)
+    
+    
+Class: <https://dbpedia.org/page/Order>
+
+    SubClassOf: 
+        <http://example.org/TaskA>,
+        <https://example.org/hasCustomer> some <https://dbpedia.org/page/Customer>,
+        <https://example.org/hasProduct> some <https://dbpedia.org/page/Product>
+    
+    
+Class: <https://dbpedia.org/page/Product>
+
+    Annotations: 
+        rdfs:comment "class representing company products"
+    
+    SubClassOf: 
+        <http://example.org/TaskA>,
+        <https://example.org/hasSupplier> min 1 <https://example.org/Suppliers>,
+        <http://example.org/hasName> exactly 1 owl:Thing,
+        <http://example.org/hasPrice> exactly 1 owl:Thing
+    
+    
+Class: <https://dbpedia.org/page/Role>
+
+    SubClassOf: 
+        <https://example.org/taskB>,
+        (<https://example.org/hasRole> some <https://dbpedia.org/page/Consultant>) or (<https://example.org/hasRole> some <https://example.org/Back_End_Developer>) or (<https://example.org/hasRole> some <https://example.org/Chief_Intelligence_Officer>)
+    
+    
+Class: <https://dbpedia.org/page/Store>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Customer>
+    
+    
+Class: <https://dbpedia.org/page/Task>
+
+    SubClassOf: 
+        <https://example.org/taskB>
+    
+    
+Class: <https://dbpedia.org/property/employees>
+
+    Annotations: 
+        rdfs:comment "the people that work should have name and age and salary and role"
+    
+    SubClassOf: 
+        <https://example.org/taskB>,
+        <https://example.org/hasRole> only <https://dbpedia.org/page/Role>,
+        <http://example.org/hasAge> exactly 1 owl:Thing,
+        <http://example.org/hasName> exactly 1 owl:Thing
+    
+    
+Class: <https://example.org/Back_End_Developer>
+
+    Annotations: 
+        rdfs:comment "back end developer is a role which should assign to each employee.
+in this role the employee can only take back end tasks not the other tasks"
+    
+    SubClassOf: 
+        <https://dbpedia.org/page/Role>,
+        (not (<http://hasTask> some <http://example.org/CIOTask>))
+         and (not (<http://hasTask> some <http://example.org/ConsultantTask>))
+         and (<http://hasTask> some <http://example.org/BackTask>)
+    
+    DisjointWith: 
+        <https://dbpedia.org/page/Consultant>, <https://example.org/Chief_Intelligence_Officer>
+    
+    
+Class: <https://example.org/BelgianCity>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Location>
+    
+    DisjointWith: 
+        <https://example.org/DutchCity>, <https://example.org/GermanCity>
+    
+    
+Class: <https://example.org/CarPart>
+
+    Annotations: 
+        rdfs:comment "class representing a certain kind of product that the company sells"
+    
+    SubClassOf: 
+        <https://dbpedia.org/page/Product>,
+        <https://example.org/isLocatedIn> only <https://example.org/GermanCity>
+    
+    
+Class: <https://example.org/Chief_Intelligence_Officer>
+
+    Annotations: 
+        rdfs:comment "Chief is a role which should assign to each employee.
+in this role the employee can take all of the tasks including (back end tasks , CIOTask, ConsultantTask"
+    
+    SubClassOf: 
+        <https://dbpedia.org/page/Role>,
+        (<http://hasTask> some <http://example.org/BackTask>)
+         and (<http://hasTask> some <http://example.org/CIOTask>)
+         and (<http://hasTask> some <http://example.org/ConsultantTask>)
+    
+    DisjointWith: 
+        <https://example.org/Back_End_Developer>
+    
+    
+Class: <https://example.org/DutchCity>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Location>
+    
+    DisjointWith: 
+        <https://example.org/BelgianCity>, <https://example.org/GermanCity>
+    
+    
+Class: <https://example.org/GermanCity>
+
+    SubClassOf: 
+        <https://dbpedia.org/page/Location>
+    
+    DisjointWith: 
+        <https://example.org/BelgianCity>, <https://example.org/DutchCity>
+    
+    
+Class: <https://example.org/Suppliers>
+
+    Annotations: 
+        rdfs:comment "class representing product suppliers"
+    
+    SubClassOf: 
+        <http://example.org/TaskA>,
+        <https://example.org/isLocatedIn> exactly 1 <https://dbpedia.org/page/Location>
+    
+    
+Class: <https://example.org/taskB>
+
+    
+Class: owl:Thing
+
+    
+Individual: <http://example.org/Front_Axle>
+
+    Types: 
+        <https://dbpedia.org/page/Product>,
+        <https://example.org/CarPart>
+    
+    
+Individual: <https://dbpedia.org/page/Alternator>
+
+    Types: 
+        <https://dbpedia.org/page/Product>,
+        <https://example.org/CarPart>
+    
+    
+Individual: <https://dbpedia.org/page/Berlin>
+
+    Types: 
+        <https://example.org/GermanCity>
+    
+    
+Individual: <https://dbpedia.org/page/Brake>
+
+    Types: 
+        <https://dbpedia.org/page/Product>,
+        <https://example.org/CarPart>
+    
+    
+Individual: <https://dbpedia.org/page/Radiator>
+
+    Types: 
+        <https://dbpedia.org/page/Product>,
+        <https://example.org/CarPart>
+    
+    
+Individual: <https://example.org/Du_sup>
+
+    Types: 
+        <https://example.org/Suppliers>
+    
+    Facts:  
+     <https://example.org/hasProduct>  Fuel_Tank,
+     <https://example.org/hasProduct>  <https://dbpedia.org/page/Brake>,
+     <https://example.org/isLocatedIn>  Maastricht
+    
+    
+Individual: Fuel_Tank
+
+    Types: 
+        <https://dbpedia.org/page/Product>,
+        <https://example.org/CarPart>
+    
+    
+Individual: GE_Sup
+
+    Types: 
+        <https://example.org/Suppliers>
+    
+    Facts:  
+     <https://example.org/isLocatedIn>  <https://dbpedia.org/page/Berlin>
+    
+    
+Individual: Maastricht
+
+    Types: 
+        <https://example.org/DutchCity>
+    
+    
+Individual: Mahshid
+
+    Types: 
+        <https://dbpedia.org/page/Customer>
+    
+    Facts:  
+     <https://example.org/hasOrder>  Order-4322
+    
+    
+Individual: Order-4322
+
+    Types: 
+        <https://dbpedia.org/page/Order>
+    
+    Facts:  
+     <https://example.org/hasCustomer>  Mahshid,
+     <https://example.org/hasProduct>  <https://dbpedia.org/page/Brake>
+    
+    

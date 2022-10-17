@@ -65,6 +65,23 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
+###  http://ids.maastrichtuniversity.nl/ontologies/familyrelations#grandfather
+:grandfather rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :grandparent ,
+                                schema:parent .
+
+
+###  http://ids.maastrichtuniversity.nl/ontologies/familyrelations#grandmother
+:grandmother rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :grandparent .
+
+
+###  http://ids.maastrichtuniversity.nl/ontologies/familyrelations#grandparent
+:grandparent rdf:type owl:ObjectProperty ;
+             rdfs:domain schema:Person ;
+             rdfs:comment "this is the class of grand parants" .
+
+
 ###  http://ids.maastrichtuniversity.nl/ontologies/familyrelations#husband
 :husband rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf wdp:P26 ;
@@ -135,6 +152,16 @@ wdp:P462 rdf:type owl:ObjectProperty ;
                     "Farbe"@de ,
                     "colour"@en ,
                     "kleur"@nl .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://ids.maastrichtuniversity.nl/ontologies/familyrelations#degree
+:degree rdf:type owl:DatatypeProperty ;
+        rdfs:domain schema:Person ;
+        rdfs:range xsd:string .
 
 
 #################################################################
